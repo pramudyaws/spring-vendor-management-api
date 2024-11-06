@@ -11,6 +11,6 @@ public class MainController {
 
     @GetMapping("/")
     public Map<String, String> helloWorld() {
-        return Collections.singletonMap("message", "Welcome to Spring Vendor Management API!");
+        return Collections.singletonMap("message", "Welcome to Spring Vendor API!");
     }
 }
