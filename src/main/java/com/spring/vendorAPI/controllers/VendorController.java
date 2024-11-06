@@ -32,7 +32,7 @@ public class VendorController {
             Vendor savedVendor = vendorService.save(vendor);
             return ResponseEntity.ok(Collections.singletonMap("data", savedVendor));
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(Collections.singletonMap("message", e.getMessage()));
+            return ResponseEntity.badRequest().body(Collections.singletonMap("error", e.getMessage()));
         }
     }
 
@@ -48,7 +48,7 @@ public class VendorController {
             Vendor vendor = vendorService.findById(id);
             return ResponseEntity.ok(Collections.singletonMap("data", vendor));
         } catch (RuntimeException e) {
-            Map<String, Object> errorResponse = Collections.singletonMap("message", e.getMessage());
+            Map<String, Object> errorResponse = Collections.singletonMap("error", e.getMessage());
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
         }
     }
@@ -59,7 +59,7 @@ public class VendorController {
             Vendor updatedVendor = vendorService.updateById(id, vendorDetails);
             return ResponseEntity.ok(Collections.singletonMap("data", updatedVendor));
         } catch (RuntimeException e) {
-            Map<String, Object> errorResponse = Collections.singletonMap("message", e.getMessage());
+            Map<String, Object> errorResponse = Collections.singletonMap("error", e.getMessage());
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
         }
     }
@@ -71,7 +71,7 @@ public class VendorController {
             Map<String, String> response = Collections.singletonMap("message", "Vendor with id " + id + " has been deleted");
             return ResponseEntity.ok(response);
         } catch (RuntimeException e) {
-            Map<String, String> errorResponse = Collections.singletonMap("message", e.getMessage());
+            Map<String, String> errorResponse = Collections.singletonMap("error", e.getMessage());
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
         }
     }
