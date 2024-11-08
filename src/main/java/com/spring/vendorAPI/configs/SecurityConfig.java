@@ -15,6 +15,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.spring.vendorAPI.filters.JwtAuthenticationFilter;
+import com.spring.vendorAPI.filters.RateLimiterFilter;
 import com.spring.vendorAPI.services.interfaces.UserService;
 
 @Configuration
@@ -23,6 +24,9 @@ public class SecurityConfig {
 
     @Autowired
     private JwtAuthenticationFilter jwtAuthenticationFilter;
+
+    @Autowired
+    private RateLimiterFilter rateLimiterFilter;
 
     @Autowired
     private UserService userService;
@@ -37,7 +41,8 @@ public class SecurityConfig {
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterAfter(rateLimiterFilter, JwtAuthenticationFilter.class);
 
         return http.build();
     }
