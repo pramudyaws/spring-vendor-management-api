@@ -2,7 +2,7 @@
 **Spring Vendor Management API** provides backend solutions for some operations, such as vendor management and user authentication/authorization
 
 ## Project setup
-1. This project uses Java 17 and PostgreSQL 15. Please ensure you have these installed on your local computer.
+1. This project uses Java 17 and PostgreSQL. Please ensure you have these installed on your local computer. (If there is an error when running the project, please use PostgreSQL 15)
 2. Use this command to clone the project: 
 ```bash
 $ git clone https://github.com/pramudyaws/spring-vendor-management-api.git
@@ -28,18 +28,18 @@ DB_PASSWORD=password
 
 > Note for `.env` file:
 > - To generate `JWT_SECRET_KEY`, you can use [JwtSecret.com](https://jwtsecret.com/generate)
-> - For database configuration, please ensure your DB credentials, such as DB name, port, user, and password.
+> - For database configuration, please ensure your DB credentials, such as DB name, port, username, and password.
 
 ## Run the project
 There are 2 ways to run the project:
-1. Use VSCode or IntelliJ IDEA to run the project
-2. Install Maven in your local computer ([Maven installation tutorial](https://youtu.be/YTvlb6eny_0?si=ntMC-PCp_T5x9zRL)). Open this project in CMD or Terminal, then use this command to run the project:
+1. Use Visual Studio Code or IntelliJ IDEA to run the project
+2. Install Maven in your local computer ([Installation Tutorial](https://youtu.be/YTvlb6eny_0?si=ntMC-PCp_T5x9zRL)). Open this project in CMD or Terminal, then use this command to run the project:
 ```bash
 $ mvn spring-boot:run
 ```
 
 ## API Documentation
-After you run the project, visit `http://localhost:{PORT}/swagger-ui/index.html` on your browser to see the Swagger API Documentation.
+After you run the project, visit `http://localhost:{PORT}/swagger-ui/index.html` on your browser to see the Swagger API Documentation. Request body needed for some endpoints is already set on the Swagger API.
 
 > Note: 
 > - Replace `{PORT}` with the actual port number defined in your `.env` file.
