@@ -16,8 +16,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spring.vendorAPI.dtos.CreateVendorDto;
+import com.spring.vendorAPI.dtos.UpdateVendorDto;
 import com.spring.vendorAPI.entities.Vendor;
 import com.spring.vendorAPI.services.interfaces.VendorService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/v1/vendors")
@@ -27,8 +31,11 @@ public class VendorController {
     private VendorService vendorService;
 
     @PostMapping
-    public ResponseEntity<Map<String, Object>> createVendor(@RequestBody Vendor vendor) {
+    public ResponseEntity<Map<String, Object>> createVendor(@RequestBody @Valid CreateVendorDto createVendorDto) {
         try {
+            Vendor vendor = new Vendor();
+            vendor.setName(createVendorDto.getName());
+
             Vendor savedVendor = vendorService.save(vendor);
             return ResponseEntity.ok(Collections.singletonMap("data", savedVendor));
         } catch (IllegalArgumentException e) {
@@ -54,8 +61,12 @@ public class VendorController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Map<String, Object>> updateVendor(@PathVariable Long id, @RequestBody Vendor vendorDetails) {
+    public ResponseEntity<Map<String, Object>> updateVendor(@PathVariable Long id,
+            @RequestBody @Valid UpdateVendorDto updateVendorDto) {
         try {
+            Vendor vendorDetails = new Vendor();
+            vendorDetails.setName(updateVendorDto.getName());
+
             Vendor updatedVendor = vendorService.updateById(id, vendorDetails);
             return ResponseEntity.ok(Collections.singletonMap("data", updatedVendor));
         } catch (RuntimeException e) {
@@ -68,7 +79,8 @@ public class VendorController {
     public ResponseEntity<Map<String, String>> deleteVendor(@PathVariable Long id) {
         try {
             vendorService.deleteById(id);
-            Map<String, String> response = Collections.singletonMap("message", "Vendor with id " + id + " has been deleted");
+            Map<String, String> response = Collections.singletonMap("message",
+                    "Vendor with id " + id + " has been deleted");
             return ResponseEntity.ok(response);
         } catch (RuntimeException e) {
             Map<String, String> errorResponse = Collections.singletonMap("error", e.getMessage());
