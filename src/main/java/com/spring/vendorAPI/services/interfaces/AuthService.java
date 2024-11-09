@@ -6,6 +6,6 @@ import com.spring.vendorAPI.entities.User;
 
 public interface AuthService {
     User registerUser(User user);
-    Map<String, String> login(String email, String password);
+    Map<String, Object> login(String email, String password);
     boolean isEmailTaken(String email);
 }

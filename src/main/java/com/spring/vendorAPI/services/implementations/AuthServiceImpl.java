@@ -58,21 +58,21 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public Map<String, String> login(String email, String password) {
+    public Map<String, Object> login(String email, String password) {
         try {
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(email, password));
 
             String token = generateToken(email);
 
-            Map<String, String> response = new HashMap<>();
+            Map<String, Object> response = new HashMap<>();
             response.put("email", email);
             response.put("accessToken", token);
 
             return response;
 
         } catch (BadCredentialsException e) {
-            throw new RuntimeException("Invalid credentials");
+            throw new BadCredentialsException("Invalid credentials");
         }
     }
 
