@@ -45,6 +45,11 @@ After you run the project, visit `http://localhost:{PORT}/swagger-ui/index.html`
 > - Replace `{PORT}` with the actual port number defined in your `.env` file.
 > - For endpoints inside `Vendor Management` tag, you need to authorize the Swagger using `accessToken`. The `accessToken` can be retrieved after a successful login endpoint call.
 
+## Rate Limiter
+In this application, I use `Bucket4j` to implement rate limiter. I created `RateLimiterFilter` and use the filter in `SecurityConfig`. This filter works whenever there is a request, it will check if the bucket still have remaining token to proceed the request or not. The bucket will reset the token every second. 
+
+I set this project to have global rate limit: 10 requests per second (check `rate.limiter.requests.per.second` attribute in `application.properties`). To check whether the project can only receive 10 requests per second, you can call endpoint `/rate-limit-test` with POST method. Put `requestCount` in your JSON payload (request body). The endpoint will return number of successful and failed requests.
+
 ## Technologies
 - **Java**: A widely-used, secure programming language
 - **Spring Boot**: A framework for fast Java app development
