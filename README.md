@@ -33,7 +33,7 @@ DB_PASSWORD=password
 ## Run the project
 There are 2 ways to run the project:
 1. Use VSCode or IntelliJ IDEA to run the project
-2. Install Maven in your local computer, open the project in CMD or Terminal, then use this command to run the project:
+2. Install Maven in your local computer ([Maven installation tutorial](https://youtu.be/YTvlb6eny_0?si=ntMC-PCp_T5x9zRL)). Open this project in CMD or Terminal, then use this command to run the project:
 ```bash
 $ mvn spring-boot:run
 ```
