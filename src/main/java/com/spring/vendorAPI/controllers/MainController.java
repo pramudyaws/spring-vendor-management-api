@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spring.vendorAPI.dtos.RateLimitTestRequestDto;
+
 import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
@@ -34,10 +36,11 @@ public class MainController {
     }
 
     @PostMapping("/rate-limit-test")
-    public ResponseEntity<Map<String, String>> rateLimitTest(@RequestBody Map<String, Object> requestBody)
+    public ResponseEntity<Map<String, String>> rateLimitTest(@RequestBody RateLimitTestRequestDto requestBody)
             throws InterruptedException, ExecutionException {
+
         final int MAX_THREADS = 50;
-        int requestCount = (int) requestBody.get("requestCount");
+        int requestCount = requestBody.getRequestCount();
 
         if (requestCount > MAX_THREADS) {
             String errorMsg = "requestCount must be less than or equal to " + MAX_THREADS;
@@ -77,7 +80,8 @@ public class MainController {
         executor.shutdown();
 
         // Calling rateLimitTest should not affect success/failure count.
-        // Therefore, successCount += 1 and failureCount -= 1 to calculate only API calls on index/welcome url
+        // Therefore, successCount += 1 and failureCount -= 1
+        // to calculate only API calls on index/welcome url
         successCount++;
         failureCount--;
 
@@ -87,5 +91,4 @@ public class MainController {
 
         return ResponseEntity.ok(response);
     }
-
 }
