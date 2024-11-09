@@ -17,6 +17,9 @@ import com.spring.vendorAPI.dtos.RegisterRequestDto;
 import com.spring.vendorAPI.entities.User;
 import com.spring.vendorAPI.services.interfaces.AuthService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
+@Tag(name = "Auth")
 @RestController
 @RequestMapping("/api/v1/auth")
 public class AuthController {

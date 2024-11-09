@@ -22,8 +22,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.vendorAPI.dtos.RateLimitTestRequestDto;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 
+@Tag(name = "General")
 @RestController
 public class MainController {
 

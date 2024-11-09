@@ -21,8 +21,10 @@ import com.spring.vendorAPI.dtos.UpdateVendorDto;
 import com.spring.vendorAPI.entities.Vendor;
 import com.spring.vendorAPI.services.interfaces.VendorService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
+@Tag(name = "Vendor Management")
 @RestController
 @RequestMapping("/api/v1/vendors")
 public class VendorController {
